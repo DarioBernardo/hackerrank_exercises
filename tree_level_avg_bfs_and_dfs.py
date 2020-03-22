@@ -1,3 +1,9 @@
+"""
+Given a binary tree, get the average value at each level of the tree.
+Explained here:
+https://vimeo.com/357608978
+pass fbprep
+"""
 import numpy as np
 
 
