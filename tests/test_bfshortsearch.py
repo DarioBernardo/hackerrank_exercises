@@ -1,5 +1,5 @@
 import unittest
-from exercises.bfsshortreach import bfs
+from exercises.tree_and_graphs.bfsshortreach import bfs
 
 
 class Tester(unittest.TestCase):

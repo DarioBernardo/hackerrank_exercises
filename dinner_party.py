@@ -1,9 +1,12 @@
 # Find all possible combination of friends using recursion
+# the total number of combination is given by binomial coefficient formula
+# n choose k where n is the number of guest and k is the table size
+# binomial coefficient = n!/(k!*(n-k)!)
 
 from itertools import combinations
 
 
-friends = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'L', 'M']
+friends = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'L', 'M', 'N']
 # friends = ['A', 'B', 'C', 'D']
 table_size = 5
 
@@ -45,7 +48,7 @@ for elem in solution:
     else:
         raise Exception(f"Element {elem} not present")
 
-if len(prop_solution) >0:
+if len(prop_solution) > 0:
     raise Exception(f"There are some extra elements in the proposed solution: {prop_solution}")
 
 if len(prop_solution) == 0:
