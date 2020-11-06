@@ -1,3 +1,17 @@
+"""
+
+Funtion return TRUE or FALSE if the input string is a palindrome.
+
+EXAMPLE:
+
+asjgjbkkht   FALSE
+
+aaaassbssaaaa  TRUE
+
+wwbbbbww   TRUE
+"""
+
+
 def is_palindrome(string):
     if len(string) == 0:
         return False

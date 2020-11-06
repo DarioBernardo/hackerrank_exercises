@@ -24,6 +24,7 @@ data = [
     ("aabacbeeeebeaabb", "beeeebe"),
     ("aaaaaa", "aaaaaa"),
     ("cxxdaaaaaarg", "daaaaaa"),
+    ("c", "c")
 ]
 
 
