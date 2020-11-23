@@ -28,55 +28,35 @@ data = [
 ]
 
 
-def check_summary(char, summary):
-    counter = 0
-    for key, value in summary.items():
-        if char != key and value > 0:
-            counter += 1
-
-    if counter > 1:
-        return False
-    return True
-
-
-def add_to_summary(c, summary):
-    char_counter = summary.get(c, 0)
-    summary[c] = char_counter + 1
-
-
-def remove_from_summary(c, summary):
-    char_counter = summary.get(c, 1)
-    summary[c] = char_counter - 1
-
-
 def riddle(s: str):
+    change_char_index = -1
+    start_index = 0
+    best_start_index = 0
+    best_end_index = 0
+    current = 0
+    char_set = set()
 
-    if len(s) <= 2:
-        return s
+    while current < len(s):
+        c = s[current]
+        char_set.add(c)
 
-    start = 0
-    end = 0
-    sol = []
-    summary = {}
+        if len(char_set) <= 2:
+            if len(char_set) == 2 and change_char_index < 0:
+                change_char_index = current
 
-    while end < len(s):
-        c = s[end]
-        if check_summary(c, summary):
-            add_to_summary(c, summary)
-            if end+1 - start > len(sol):
-                sol = s[start:end+1]
+            current += 1
 
-            end += 1
-        else:
-            while not check_summary(c, summary):
-                char_to_remove = s[start]
-                remove_from_summary(char_to_remove, summary)
-                start += 1
+            if current - start_index > best_end_index - best_start_index:
+                best_end_index = current
+                best_start_index = start_index
 
-    if end-start > len(sol):
-        sol = s[start:end]
+        elif len(char_set) == 3:
+            char_set = set()
+            current = change_char_index
+            start_index = change_char_index
+            change_char_index = -1
 
-    return sol
+    return s[best_start_index:best_end_index]
 
 
 for data_in, expected_result in data:
