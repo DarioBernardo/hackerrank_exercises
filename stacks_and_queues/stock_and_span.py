@@ -8,17 +8,10 @@ The span S(i) of the stock’s price on a given day i is defined as the maximum 
 the given day, for which the price of the stock on the current day is less than or equal to its price on the given day.
 For example, if an array of 7 days prices is given as {100, 80, 60, 70, 60, 75, 85},
 then the span values for corresponding 7 days are {1, 1, 1, 2, 1, 4, 6}.
-"""
 
-"""
-{100, 80, 60, 70, 60, 75, 85}
-
-
-stack = 100
-next  =
-
-[1]
-
+solutions:
+https://www.geeksforgeeks.org/the-stock-span-problem/
+http://www.algorithmsandme.com/stacks-stock-span-problem/
 """
 
 test_cases = [
@@ -36,7 +29,7 @@ solutions = [
 ]
 
 
-def stock_and_span(arr):
+def stock_and_span_v1(arr):
 
     stack = []
     weight = []
@@ -52,6 +45,23 @@ def stock_and_span(arr):
         stack.append(stock)
         weight.append(current_stock_weight)
         result.append(current_stock_weight)
+
+    return result
+
+
+def stock_and_span(arr):
+    # Adding -1 to consider when looking backwards since beginning,
+    # and 0 because we initialise the first element result with span 1
+    stack = [-1, 0]
+    result = [1]
+
+    for i in range(1, len(arr)):
+        today_price = arr[i]
+        while len(stack) > 1 and arr[stack[-1]] < today_price:
+            del stack[-1]
+
+        result.append(i-stack[-1])
+        stack.append(i)
 
     return result
 

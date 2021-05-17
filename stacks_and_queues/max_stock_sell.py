@@ -36,51 +36,21 @@ max_profit 800
 """
 
 
-def max_profit_2(price_list: list):
-    #  check for len array
+def max_profit_2(prices: list):
+    if len(prices) <= 1:
+        return 0
 
-    index = 2
-    buy_stack = [0]
-    sell_stack = [1]
-    profit_stack = [price_list[1] - price_list[0]]
+    min_index = 0
+    max_profit = 0
 
-    while index < len(price_list):
-        daily_price = price_list[index]
-
-        # in case we have a new min in the stack
-        if len(buy_stack) != len(sell_stack):
-            current_profit = daily_price - price_list[buy_stack[-1]]
-            while len(profit_stack) > 0 and current_profit > profit_stack[-1]:
-                profit_stack.pop(-1)
-                sell_stack.pop(-1)
-                buy_stack.pop(-2)
-
-            profit_stack.append(current_profit)
-            sell_stack.append(index)
-
-        if len(sell_stack) > 0 and daily_price > price_list[sell_stack[-1]]:
-
-            while len(sell_stack) > 0 and daily_price > price_list[sell_stack[-1]]:
-                sell_stack.pop(-1)
-                profit_stack.pop(-1)
-
-            sell_stack.append(index)
-            current_profit = daily_price - price_list[buy_stack[-1]]
-            profit_stack.append(current_profit)
-
+    for i, price in enumerate(prices):
+        if price <= prices[min_index]:
+            min_index = i
         else:
-            if len(sell_stack) > 0 and daily_price < price_list[buy_stack[-1]]:
-                if len(buy_stack) != len(sell_stack):
-                    buy_stack.pop(-1)
-                else:
-                    buy_stack.append(index)
+            max_profit = max(max_profit, price - prices[min_index])
 
-        index += 1
-
-    # flush the array
-    print(buy_stack)
-    print(sell_stack)
-    print(profit_stack)
+    return max_profit
 
 
-max_profit_2(prices)
+val = max_profit_2(prices)
+print(val)
